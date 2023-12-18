@@ -317,6 +317,23 @@ def add_trees(t1, t2):
       5
     """
     "*** YOUR CODE HERE ***"
+    if t1 == []:
+        return t2
+    if t2 == []:
+        return t1
+    branch1 = branches(t1)
+    branch2 = branches(t2)
+    len1 = len(branch1)
+    len2 = len(branch2)
+    real_len = min(len1, len2)
+    new_branches = []
+    for i in range(real_len):
+        new_branches.append(add_trees(branch1[i], branch2[i]))
+    if len1 == real_len:
+        new_branches += branch2[real_len:]
+    elif len2 == real_len:
+        new_branches += branch1[real_len:]
+    return tree(label(t1) + label(t2), new_branches)
 
 
 def build_successors_table(tokens):
